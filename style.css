@@ -1,0 +1,56 @@
+* , *::before, *::after {
+    box-sizing: border-box; 
+    font-family: Gotham Rounded, sans-serif; 
+    font-weight: normal; 
+}
+
+body {            /*stylowanie tła, padding zeby nie było białych krawędzi*/
+    padding: 0; 
+    margin: 0; 
+    background: linear-gradient(to right, #00AAFF, #00FF6C); 
+}
+
+.calculator-grid {
+    display: grid; /*CSS Grid, układa elementy w pionowej linii */
+    justify-content: center; 
+    align-content: center; /*zamiast align center, zeby elementy się połączyły a nie były rozwalone*/
+    min-height: 100vh; /*musimy ustawić, zeby było wycentrowane, align nie działa, bo calculator-grid domyślnie nie zajmuje całej wysokości*/ 
+    grid-template-columns: repeat(4, 100px); /*to sprawia ze wyglądają tak ładnie i nie układają się pod sobą*/
+    grid-template-rows: minmax(120px, auto) repeat(5, 100px); 
+}
+
+.calculator-grid > button {
+    cursor: pointer; 
+    font-size: 2rem; /*rem, em to relative units- jednostki dziedziczące, względne, nie jak piksele; em dziedziczy po elemencie w którym się znajduje a rem po root'cie- 16px dla większości przeglądarek*/
+    border: 1px solid white; 
+    outline: none;
+    background-color: rgba(255, 255, 255, .75); /*kolor przycisków, 75 procent white*/
+}
+
+.calculator-grid > button:hover {  /*dynamiczna pseudoklasa*/
+    background-color: rgba(255, 255, 255, .9);
+}
+
+.span-two {
+    grid-column: span 2; /*daliśmy po zamianie align center na align content, bo ac i suma stały się zbyt małe*/
+}
+
+.output {
+    grid-column: 1/ -1; /*trik do wypchnięcia ac i del z tworzenia pojedynczej kolumny i góry */
+    background-color: rgba(0, 0, 0, .75); 
+    display: flex;  /*wyświetla tekst w jednej linii*/
+    align-items: flex-end; 
+    justify-content: space-around; /*elementy trochę blizej siebie*/
+    flex-direction: column; 
+    padding: 10px; 
+    word-wrap: break-word; 
+    word-break: break-all; 
+}
+.output .previous-operand {
+    color: rgba(255, 255, 255, .75); 
+    font-size: 1.5rem; 
+}
+.output .current-operand {
+    color: white; 
+    font-size: 2.5rem; 
+}
